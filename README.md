@@ -1,5 +1,8 @@
 # Rego Check
 
+#### Explanatory notes:
+- CORS and other network/auth configs are primitive and **should not** be deployed as-is.
+
 ## What is it?
 - **Front End:** React Router
 - **Back End:** C# .NET
