@@ -97,7 +97,7 @@ class CarExpirationChecker : BackgroundService
     {
         while (!stoppingToken.IsCancellationRequested)
         {
-            await Task.Delay(TimeSpan.FromSeconds(5), stoppingToken);
+            await Task.Delay(TimeSpan.FromSeconds(3), stoppingToken);
 
             var filePath = Path.Combine(AppContext.BaseDirectory, "someCars.json");
 
@@ -154,6 +154,21 @@ class ExpiredCarStore
 
 class CarHub : Hub
 {
+    private readonly ExpiredCarStore _expiredCarStore;
+
+    public CarHub(ExpiredCarStore expiredCarStore)
+    {
+        _expiredCarStore = expiredCarStore;
+    }
+
+    public override async Task OnConnectedAsync()
+    {
+        // Send all currently expired cars to the newly connected client
+        var expiredCars = _expiredCarStore.GetAllExpiredCars();
+        await Clients.Caller.SendAsync("CarExpiredBatch", expiredCars);
+
+        await base.OnConnectedAsync();
+    }
 }
 
 // ==========

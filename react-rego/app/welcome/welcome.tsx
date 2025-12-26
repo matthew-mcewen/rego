@@ -125,10 +125,14 @@ export function Welcome() {
 
 export function PageHeader() {
     return (
-        <header className="flex flex-col items-center gap-9">
+        <header className="flex flex-col items-center gap-6">
             <div className="w-[500px] max-w-[100vw] p-4">
                 <h1 className="text-3xl lg:text-6xl xl:text-7xl text-center mx-auto font-thin">Rego Check</h1>
             </div>
+            <nav className="flex flex-row gap-1.5 lg:gap-3 justify-between mx-auto text-center">
+                <a href="/" className="text-blue-500 dark:text-blue-400 hover:text-blue-300">Homepage</a>
+                <a href="/registration" className="text-blue-500 dark:text-blue-400 hover:text-blue-300">Expirations</a>
+            </nav>
         </header>
     );
 }
