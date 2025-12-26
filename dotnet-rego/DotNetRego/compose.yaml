@@ -1,0 +1,7 @@
+﻿services:
+  dotnetrego:
+    image: dotnetrego
+    build:
+      context: .
+      dockerfile: Dockerfile
+
